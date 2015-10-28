@@ -1,0 +1,56 @@
+<html ng-app="redditClone">
+<head>
+  <meta charset="utf-8">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.4/angular.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script type="text/javascript" src="http://momentjs.com/downloads/moment.js"></script>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script type="text/javascript" src="script.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://bootswatch.com/slate/bootstrap.css">
+  <title>Reddit Clone</title>
+</head>
+<body class="container-fluid" ng-controller="redditController">
+  <nav class="row navbar">
+    <h3 class="col-xs-2 navbar-header" id="hideBtn">RedditClone</h3>
+    <p class="col-xs-2 btn btn-primary" id="navAddPost"> Add a Post</p>
+    <input class="col-xs-2 well well-sm" id="searchBar" type="text" ng-model="query" placeholder="Search" />
+    <label for="dropdown" class="col-xs-1" id="label">Sort By...</label>
+    <select id="dropdown" class="col-xs-2 dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" ng-model="sorted">
+      <option value="-vote">Sort By Votes</option>
+      <option value="dateSincePost">Sort By Date</option>
+      <option value="title">Sort By Title</option>
+    </select>
+  </nav>
+
+  <form name="newPostForm" class="col-xs-10 form" id="addPost" ng-submit="submitNewPost(newPostForm.$valid)" novalidate>
+    <label for="title">Title</label>
+    <input type="text" id="title" name="title"ng-model="newPost.title" required="true"/>
+
+    <label for="author">Author</label>
+    <input type="text" id="author" name="author" ng-model="newPost.author" required="true" />
+
+    <label for="image">Image URL</label>
+    <input type="text" id="image" name="image" ng-model="newPost.image" required="true" />
+
+    <label for="description">Description</label>
+    <input type="text" id="description" name="description" ng-model="newPost.description" required="true" />
+    <input type="submit" class="btn btn-primary" value="Submit Post" ng-disabled="newPostForm.$invalid"/>
+  </form>
+
+  <section class="row">
+    <ul>
+      <li class="col-xs-10" ng-repeat="post in posts | filter:query | orderBy: sorted">
+        <img class="col-xs-3" ng-src="{{post.image}}" alt="post Picture" />
+        <h3> {{ post.title }} </h3>
+        <p>{{ post.vote }}</p>
+        <button class="btn btn-success btn-xs" ng-click="upVote(post)">▲</button>
+        <button class="btn btn-danger btn-xs" ng-click="downVote(post)">▼</button>
+        <h4> {{ post.author }} </h4>
+        <p> {{ post.description }} </p>
+        <p> {{ post.dateSincePost }} </p>
+      </li>
+    </ul>
+
+</body>
+</html>

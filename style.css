@@ -1,0 +1,19 @@
+select, option {
+  background-color: #282B30;
+  color: #C8C8C8;
+  border: solid 2px #282B30;
+  height: 5%;
+}
+
+#searchBar {
+  color: #C8C8C8;
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-bottom: 2px;
+}
+
+#navAddPost, #dropdown, #label {
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-bottom: 2px;
+}
