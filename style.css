@@ -17,3 +17,10 @@ select, option {
   margin-left: 10px;
   margin-bottom: 2px;
 }
+
+li {
+  background-color: #1C1E22;
+  border-radius: 5px;
+  margin: 3px 3px 3px 3px;
+  padding-top: 8px;
+}
