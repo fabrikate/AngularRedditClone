@@ -2,71 +2,21 @@
 <head>
   <meta charset="utf-8">
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.4/angular.min.js"></script>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-route.js"></script>
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
   <script type="text/javascript" src="http://momentjs.com/downloads/moment.js"></script>
-  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/X.Y.Z/angular-animate.js"></script>
+
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
   <link href='https://fonts.googleapis.com/css?family=Special+Elite' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" type="text/css" href="style.css">
   <link rel="stylesheet" type="text/css" href="animation.css">
-  <script type="text/javascript" src="script.js"></script>
+
+  <script type="text/javascript" src="js/app.js"></script>
+  <script type="text/javascript" src="js/controller.js"></script>
   <link rel="stylesheet" type="text/css" href="https://bootswatch.com/slate/bootstrap.css">
   <title>Reddit Clone</title>
 </head>
-<body class="container-fluid" ng-controller="redditController">
-  <nav class="row navbar">
-    <h3 class="col-xs-3 navbar-header" id="hideBtn">Reddit: Movie Edition</h3>
-    <p class="col-xs-2 btn btn-primary" id="navAddPost" ng-click="addPost = !addPost"> Add a Post</p>
-    <input class="col-xs-2 well well-sm" id="searchBar" type="text" ng-model="query" placeholder="Search" />
-    <label for="dropdown" class="col-xs-1" id="label">Sort By...</label>
-    <select id="dropdown" class="col-xs-2 dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" ng-model="sorted">
-      <option value="-vote">Sort By Votes</option>
-      <option value="dateSincePost">Sort By Date</option>
-      <option value="title">Sort By Title</option>
-    </select>
-  </nav>
-
-  <form name="newPostForm" class="col-xs-10 form" id="addPost" ng-show="addPost" ng-submit="submitNewPost(newPostForm.$valid)" novalidate>
-    <label for="title">Title</label>
-    <input type="text" id="title" name="title"ng-model="newPost.title" required="true"/>
-
-    <label for="author">Author</label>
-    <input class="form-group has-warning" type="text" id="author" name="author" ng-model="newPost.author" required="true" />
-
-    <label for="image">Image URL</label>
-    <input type="text" id="image" name="image" ng-model="newPost.image" required="true" />
-
-    <label for="description">Description</label>
-    <input type="text" id="description" name="description" ng-model="newPost.description" required="true" />
-    <input type="submit" class="btn btn-primary" value="Submit Post" ng-disabled="newPostForm.$invalid"/>
-  </form>
-
-  <section class="row">
-    <ul>
-      <li class="col-xs-10 col-xs-offset-1" ng-repeat="post in posts | filter:query | orderBy: sorted">
-        <img class="col-xs-5" ng-src="{{post.image}}" alt="post Picture" />
-        <h2> {{ post.title }} </h2>
-        <h4 ng-class="{positive: post.vote > 0, negative: post.vote < 0}">{{ post.vote }}</h4>
-        <button class="btn btn-success btn-xs" ng-click="upVote(post)">▲</button>
-        <button class="btn btn-danger btn-xs" ng-click="downVote(post)">▼</button>
-        <h5>by: {{ post.author }} </h5>
-        <p> {{ post.description }} </p>
-        <p><i> {{ post.dateSincePost }} </i></p>
-        <button class="btn btn-primary btn-sm" ng-click="showComments = !showComments">Comments {{post.comments.length}}</button>
-        <button class="btn btn-primary btn-sm" ng-click="commentForm = !commentForm">Add Comment</button>
-        <section id="addComment">
-          <form name="newCommentForm" ng-show="commentForm" ng-submit="addComment(post)" >
-            <input type="text" name="content" ng-model="comment.content" placeholder="Your thoughts..." required/>
-            <input type="text" name="author" ng-model="comment.author" placeholder="Author" required/>
-            <input type="submit" class="btn btn-primary btn-xs" />
-          </form>
-        </section>
-        <ul id="comments" ng-show="showComments" ng-repeat="comment in post.comments track by $index">
-          <li> {{ comment.content }} ( {{ comment.author }} ) </li>
-        </ul>
-      </li>
-    </ul>
-  </section>
-
+<body >
+  <div ng-view></div>
 </body>
 </html>
